@@ -19,6 +19,7 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin
 NAME=squeezelite
 DESC="SqueezeBox Lite"
 DAEMON=/opt/squeezelite/squeezelite-static
+WRAPPER_SCRIPT=/opt/squeezelite/squeezelite-static.sh
 START_SL=true
 SL_OPTS="-n raspberrypi -P /var/run/$NAME.pid -z"
 
@@ -39,7 +40,7 @@ sl_start () {
     log_daemon_msg "Starting $DESC" "$NAME"
 
     start-stop-daemon --start --quiet --oknodo --pidfile "$PIDFILE" \
-        --exec $DAEMON -- $SL_OPTS
+        --exec $WRAPPER_SCRIPT -- $SL_OPTS
 
     log_end_msg $?
 }
